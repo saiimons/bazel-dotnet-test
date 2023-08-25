@@ -1,21 +1,47 @@
 load(
+    "@rules_proto//proto:defs.bzl", 
+    "proto_library",
+)
+
+load(
+    "@rules_proto_grpc//csharp:defs.bzl", 
+    "csharp_proto_compile",
+)
+
+load(
     "@rules_dotnet//dotnet:defs.bzl",
     "csharp_library",
 )
 
-csharp_library(
-    name = "lib.dll",
-    srcs = [":test.cs"],
-    private_deps = [
-        "@main//microsoft.netcore.platforms",
-        "@main//netstandard.library",
-        "@main//system.buffers",
-        "@main//system.memory",
-        "@main//system.numerics.vectors",
-        "@main//system.runtime.compilerservices.unsafe",
+proto_library(
+    name = "protos",
+    visibility = ["//visibility:public"],
+    srcs = [":test.proto"],
+)
+
+csharp_proto_compile(
+    name = "csharp_protos",
+    protos = [
+        ":protos",
     ],
+)
+
+csharp_library(
+    name = "lib",
+    srcs = [":csharp_protos"],
+    private_deps = [],
     target_frameworks = ["netstandard2.0"],
     deps = [
         "@main//google.protobuf",
+        "@main//microsoft.netcore.platforms",
+        "@main//microsoft.netcore.targets",
+        "@main//netstandard.library",
+        "@main//system.buffers",
+        "@main//system.diagnostics.debug",
+        "@main//system.diagnostics.tools",
+        "@main//system.memory",
+        "@main//system.numerics.vectors",
+        "@main//system.runtime",
+        "@main//system.runtime.compilerservices.unsafe",
     ],
 )

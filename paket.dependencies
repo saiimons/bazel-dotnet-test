@@ -4,3 +4,6 @@ storage: none
 framework: netstandard2.0
 nuget Google.Protobuf 3.24.1
 nuget NETStandard.Library 2.0.3
+nuget System.Diagnostics.Debug 4.3.0
+nuget System.Diagnostics.Tools 4.3.0
+nuget System.Runtime 4.3.1
