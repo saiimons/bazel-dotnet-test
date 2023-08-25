@@ -5,9 +5,14 @@ load(
 
 csharp_library(
     name = "lib.dll",
-    srcs = [],
+    srcs = [":test.cs"],
     private_deps = [
-	"@main//netstandard.library",
+        "@main//microsoft.netcore.platforms",
+        "@main//netstandard.library",
+        "@main//system.buffers",
+        "@main//system.memory",
+        "@main//system.numerics.vectors",
+        "@main//system.runtime.compilerservices.unsafe",
     ],
     target_frameworks = ["netstandard2.0"],
     deps = [
