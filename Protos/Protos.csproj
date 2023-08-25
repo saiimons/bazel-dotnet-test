@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <ProtoClassesPath>../bazel-bin/csharp_protos/**/*.cs</ProtoClassesPath>
+    </PropertyGroup>
+
+    <Target Name="GenerateProtos" BeforeTargets="PreBuildEvent">
+        <Exec Command="bazel build //:csharp_protos" />
+    </Target>
+    <Target Name="AddGeneratedProtos" AfterTargets="PreBuildEvent" BeforeTargets="BeforeCompile;CoreCompile">
+        <ItemGroup>
+            <Compile Include="$(ProtoClassesPath)" />
+        </ItemGroup>
+    </Target>
+
+    <Import Project="..\.paket\Paket.Restore.targets" />
+
+</Project>
