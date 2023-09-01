@@ -4,3 +4,4 @@ System.Diagnostics.Debug
 System.Numerics.Vectors
 Microsoft.NETCore.Targets
 System.Runtime
+Grpc.Core

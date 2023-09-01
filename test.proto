@@ -3,6 +3,10 @@ syntax = "proto3";
 package com.saiimons;
 
 message Test {
-  string foo = 1;
-  bool bar = 2;
+  optional string foo = 1;
+  optional bool bar = 2;
+}
+
+service TestApi {
+  rpc echo (Test) returns (Test);
 }

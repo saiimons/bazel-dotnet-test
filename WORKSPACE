@@ -6,9 +6,9 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "rules_dotnet",
-    sha256 = "a6e8687fd9d91c1cb41df51cdafaffe9be386ad99d63d8e2ae77c64f1165c573",
-    strip_prefix = "rules_dotnet-0.10.0",
-    url = "https://github.com/bazelbuild/rules_dotnet/releases/download/v0.10.0/rules_dotnet-v0.10.0.tar.gz",
+    sha256 = "fac964c6f9663904dfed5a951a59893d505246e77e5bdad47c22e2ae081c3631",
+    strip_prefix = "rules_dotnet-0.10.1",
+    url = "https://github.com/bazelbuild/rules_dotnet/releases/download/v0.10.1/rules_dotnet-v0.10.1.tar.gz",
 )
 
 load(
@@ -67,6 +67,9 @@ load("@rules_proto_grpc//csharp:repositories.bzl", rules_proto_grpc_csharp_repos
 rules_proto_grpc_csharp_repos()
 
 load("@io_bazel_rules_dotnet//dotnet:deps.bzl", "dotnet_repositories")
+load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
+
+grpc_deps()
 
 dotnet_repositories()
 
@@ -79,6 +82,10 @@ load(
 dotnet_register_toolchains()
 
 dotnet_repositories_nugets()
+
+load("@rules_proto_grpc//csharp/nuget:nuget.bzl", "nuget_rules_proto_grpc_packages")
+
+nuget_rules_proto_grpc_packages()
 
 ########################################
 ### paket2bazel
