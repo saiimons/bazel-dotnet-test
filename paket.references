@@ -1,6 +1,2 @@
 Google.Protobuf
-NETStandard.Library
-System.Diagnostics.Debug
-System.Numerics.Vectors
-Microsoft.NETCore.Targets
-System.Runtime
+Grpc.Net.Client

@@ -5,7 +5,6 @@ load(
 
 load(
     "@rules_proto_grpc//csharp:defs.bzl", 
-    "csharp_proto_compile",
     "csharp_grpc_compile",
 )
 
@@ -20,15 +19,11 @@ proto_library(
     srcs = [":test.proto"],
 )
 
-csharp_proto_compile(
-    name = "csharp_protos",
-    protos = [
-        ":protos",
-    ],
-)
-
 csharp_grpc_compile(
     name = "csharp_proto_grpc",
+    options = {
+        "*": ["internal_access"],
+    },
     protos = [
         ":protos",
     ],
@@ -39,13 +34,12 @@ csharp_library(
     srcs = [":csharp_proto_grpc"],
     private_deps = [
         "@main//netstandard.library",
-        "@main//system.buffers",
-        "@main//system.memory",
     ],
     target_frameworks = ["netstandard2.0"],
     deps = [
+        "@main//system.memory",
         "@main//google.protobuf",
-        "@main//grpc.core",
         "@main//grpc.core.api",
+        "@main//grpc.net.client",
     ],
 )

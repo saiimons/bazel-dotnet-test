@@ -2,11 +2,11 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <ProtoClassesPath>../bazel-bin/csharp_protos/**/*.cs</ProtoClassesPath>
+        <ProtoClassesPath>../bazel-bin/csharp_proto_grpc/**/*.cs</ProtoClassesPath>
     </PropertyGroup>
 
     <Target Name="GenerateProtos" BeforeTargets="PreBuildEvent">
-        <Exec Command="bazel build //:csharp_protos" />
+        <Exec Command="../bazel build //:csharp_proto_grpc" />
     </Target>
     <Target Name="AddGeneratedProtos" AfterTargets="PreBuildEvent" BeforeTargets="BeforeCompile;CoreCompile">
         <ItemGroup>
